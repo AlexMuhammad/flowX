@@ -21,6 +21,17 @@ type Phase =
 
 const PLACEHOLDER = 'Deploy 1 USDC for best yield, low risk';
 
+const EXAMPLES = [
+  {
+    label: 'Lend · low risk',
+    text: 'lend 1 USDT on X Layer for safest stablecoin yield, low risk',
+  },
+  {
+    label: 'LP · medium risk',
+    text: 'provide liquidity 1 USDT to a Uniswap V3 pool, medium risk, accept impermanent loss',
+  },
+];
+
 function strategyLabel(protocol: string) {
   if (/aave/i.test(protocol)) return 'Lending';
   if (/okx|uniswap|dex/i.test(protocol)) return 'DEX routing';
@@ -104,6 +115,29 @@ export default function HomePage() {
             Runs on X Layer mainnet · $0.05 USDG access fee via x402 · real
             funds may move.
           </p>
+
+          <div className="mt-8">
+            <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.14em] text-white/30">
+              Try an example
+            </div>
+            <div className="flex flex-col gap-2">
+              {EXAMPLES.map((ex) => (
+                <button
+                  key={ex.label}
+                  type="button"
+                  onClick={() => setText(ex.text)}
+                  className="group flex items-start gap-3 rounded-lg border border-white/10 bg-white/[0.02] px-4 py-3 text-left transition hover:border-white/30 hover:bg-white/[0.05]"
+                >
+                  <span className="mt-0.5 w-24 flex-none font-mono text-[10px] uppercase tracking-[0.14em] text-white/40 group-hover:text-white/70">
+                    {ex.label}
+                  </span>
+                  <span className="text-xs text-white/70 group-hover:text-white">
+                    {ex.text}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       )}
 
